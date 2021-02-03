@@ -2,6 +2,7 @@ from datetime import time
 from typing import List, Optional
 
 from pydantic import BaseModel, Field
+from pydantic import constr
 
 
 class Address(BaseModel):
@@ -58,14 +59,19 @@ Password = Field(min_length=6, max_length=14, regex="[a-zA-Z0-9,.;:\+\-_']")
 
 
 class LoginRequest(BaseModel):
-    phone_number: str
+    phone_number: constr(max_length=50, strip_whitespace=True)
     password: str = Password
 
 
 class LoginResponse(BaseModel):
-    token: str
-    full_name: str
+    access_token: str
+    token_type: str = "bearer"
 
 
 class PasswordChangeRequest(BaseModel):
     password: str = Password
+
+
+class UserInfo(BaseModel):
+    user_id: str
+    full_name: str

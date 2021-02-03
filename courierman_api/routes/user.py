@@ -1,15 +1,25 @@
 from fastapi import APIRouter, Depends
 
 from courierman_api.auth_manager import manager
-from courierman_api.models import (
-    PasswordChangeRequest,
-)
+from courierman_api.models import PasswordChangeRequest, UserInfo
 from courierman_api.response_examples import (
     NOT_AUTHENTICATED_RESPONSE_EXAMPLE,
     ACCESS_DENIED_RESPONSE_EXAMPLE,
 )
 
 user_router = APIRouter(prefix="/user", tags=["User"])
+
+
+@user_router.get(
+    "/info",
+    responses={
+        401: {"content": {"application/json": NOT_AUTHENTICATED_RESPONSE_EXAMPLE}},
+        403: {"content": {"application/json": ACCESS_DENIED_RESPONSE_EXAMPLE}},
+    },
+    response_model=UserInfo,
+)
+def info(user=Depends(manager)):
+    return None
 
 
 @user_router.post(
