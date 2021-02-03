@@ -43,7 +43,7 @@ def order(order_id: str, user=Depends(manager)):
 
 
 @orders_router.post(
-    "/{order_id}",
+    "/{order_id}/delivered",
     status_code=201,
     responses={
         401: {"content": {"application/json": NOT_AUTHENTICATED_RESPONSE_EXAMPLE}},
@@ -51,6 +51,6 @@ def order(order_id: str, user=Depends(manager)):
         404: {"content": {"application/json": NOT_FOUND_RESPONSE_EXAMPLE}},
     },
 )
-def deliver_order(order_id: str, user=Depends(manager)):
+def delivered(order_id: str, user=Depends(manager)):
     """ Change order status to delivered """
     return None
