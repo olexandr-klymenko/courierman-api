@@ -73,5 +73,5 @@ class PasswordChangeRequest(BaseModel):
 
 
 class UserInfo(BaseModel):
-    user_id: str
     full_name: str
+    phone_number: str

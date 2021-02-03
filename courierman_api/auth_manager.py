@@ -4,7 +4,7 @@ SECRET = "3e7d146240317ce9a5581aee8e27488e51fca138187e6798"
 
 manager = LoginManager(SECRET, tokenUrl="/api/auth/token")
 
-fake_db = {"101": {"password": "101"}}
+fake_db = {"+380673705009": {"user_id": "123456", "password": "101"}}
 
 
 @manager.user_loader

@@ -23,7 +23,7 @@ routes_router = APIRouter(prefix="/routes", tags=["Routes"])
         403: {"content": {"application/json": ACCESS_DENIED_RESPONSE_EXAMPLE}},
     },
 )
-def routes_list(user_id: str, user=Depends(manager)):
+def routes_list(user=Depends(manager)):
     """ Get routes list """
     return []
 
