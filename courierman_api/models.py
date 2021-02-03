@@ -68,5 +68,4 @@ class LoginResponse(BaseModel):
 
 
 class PasswordChangeRequest(BaseModel):
-    old_password: str
     password: str = Password

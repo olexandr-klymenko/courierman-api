@@ -1,13 +1,14 @@
 import uvicorn
 from fastapi import FastAPI, APIRouter
 
-from courierman_api.routes import orders_router, routes_router, user_router
+from courierman_api.routes import auth_router, orders_router, routes_router, user_router
 from courierman_api.config import API_PREFIX, DEBUG, PROJECT_NAME, VERSION
 
 api_router = APIRouter()
-api_router.include_router(orders_router)
-api_router.include_router(routes_router)
+api_router.include_router(auth_router)
 api_router.include_router(user_router)
+api_router.include_router(routes_router)
+api_router.include_router(orders_router)
 
 
 def get_application() -> FastAPI:
