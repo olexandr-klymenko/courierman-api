@@ -44,6 +44,7 @@ def order(order_id: str, user=Depends(manager)):
 
 @orders_router.post(
     "/{order_id}/delivered",
+    response_model=OrderFull,
     status_code=201,
     responses={
         401: {"content": {"application/json": NOT_AUTHENTICATED_RESPONSE_EXAMPLE}},
@@ -52,5 +53,5 @@ def order(order_id: str, user=Depends(manager)):
     },
 )
 def delivered(order_id: str, user=Depends(manager)):
-    """ Change order status to delivered """
+    """ Set the order's status as delivered """
     return None
