@@ -68,7 +68,7 @@ class StoreInfo(BaseModel):
 
 class RouteBrief(BaseModel):
     route_id: str
-    start_point: AddressBrief
+    start_point: StoreInfo
     delivery_slot: DeliverySlot
     is_completed: bool
     number_of_orders: int
@@ -76,7 +76,7 @@ class RouteBrief(BaseModel):
 
 class RouteFull(BaseModel):
     route_id: str
-    store_info: StoreInfo
+    start_point: StoreInfo
     is_completed: bool
     orders: List[OrderBrief]
 
