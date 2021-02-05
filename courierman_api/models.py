@@ -5,29 +5,37 @@ from pydantic import BaseModel, Field
 from pydantic import constr
 
 
-class Address(BaseModel):
-    city: str
+class AddressBrief(BaseModel):
     street: str
     building: str
+
+
+class AddressFull(AddressBrief):
+    city: str
+    block: Optional[int]
     entrance: Optional[int]
     entrance_code: Optional[str]
     floor: Optional[int]
     flat: Optional[str]
-    elevator: Optional[bool]
+    office: Optional[str]
+    company: Optional[str]
+    is_elevator: Optional[bool]
 
 
 class CustomerInfo(BaseModel):
-    address: Address
+    address: AddressFull
     name: str
     phone_number: str
-    customer_class: str
+    customer_type: str
 
 
 class ProductItem(BaseModel):
     name: str
     price: float
     quantity: float
+    weight: float
     total_price: float
+    image: str
 
 
 class DeliverySlot(BaseModel):
@@ -35,9 +43,9 @@ class DeliverySlot(BaseModel):
     finish_time: time
 
 
-class Order(BaseModel):
-    customer_info: CustomerInfo
+class OrderBrief(BaseModel):
     status: str
+    address: AddressBrief
     delivery_slot: DeliverySlot
     boxes: List[str]
     virtual_boxes: List[str]
@@ -46,13 +54,31 @@ class Order(BaseModel):
     payment_status: str
     actual_items_price: float
     comment: str
+
+
+class OrderFull(OrderBrief):
+    customer_info: CustomerInfo
     items: List[ProductItem]
 
 
-class Route(BaseModel):
+class StoreInfo(BaseModel):
+    chain_logo: str
+    address: AddressBrief
+
+
+class RouteBrief(BaseModel):
     route_id: str
-    store_info: str
-    orders: List[Order]
+    start_point: AddressBrief
+    delivery_slot: DeliverySlot
+    is_completed: bool
+    number_of_orders: int
+
+
+class RouteFull(BaseModel):
+    route_id: str
+    store_info: StoreInfo
+    is_completed: bool
+    orders: List[OrderBrief]
 
 
 Password = Field(min_length=6, max_length=14, regex="[a-zA-Z0-9,.;:\+\-_']")

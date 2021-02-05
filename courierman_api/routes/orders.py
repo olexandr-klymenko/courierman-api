@@ -4,7 +4,7 @@ from fastapi import APIRouter, Depends
 
 from courierman_api.auth_manager import manager
 from courierman_api.models import (
-    Order,
+    OrderFull, OrderBrief
 )
 from courierman_api.response_examples import (
     NOT_FOUND_RESPONSE_EXAMPLE,
@@ -17,7 +17,7 @@ orders_router = APIRouter(prefix="/orders", tags=["Orders"])
 
 @orders_router.get(
     "/",
-    response_model=List[Order],
+    response_model=List[OrderBrief],
     responses={
         401: {"content": {"application/json": NOT_AUTHENTICATED_RESPONSE_EXAMPLE}},
         403: {"content": {"application/json": ACCESS_DENIED_RESPONSE_EXAMPLE}},
@@ -30,7 +30,7 @@ def orders_list(route_id: str, user=Depends(manager)):
 
 @orders_router.get(
     "/{order_id}",
-    response_model=Order,
+    response_model=OrderFull,
     responses={
         401: {"content": {"application/json": NOT_AUTHENTICATED_RESPONSE_EXAMPLE}},
         403: {"content": {"application/json": ACCESS_DENIED_RESPONSE_EXAMPLE}},
