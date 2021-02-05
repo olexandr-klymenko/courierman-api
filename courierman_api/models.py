@@ -25,7 +25,6 @@ class AddressFull(AddressBrief):
 class CustomerInfo(BaseModel):
     address: AddressFull
     name: str
-    phone_number: str
     customer_type: str
 
 

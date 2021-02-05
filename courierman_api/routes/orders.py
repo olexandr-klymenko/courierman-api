@@ -44,7 +44,6 @@ def order(order_id: str, user=Depends(manager)):
 
 @orders_router.post(
     "/{order_id}/delivered",
-    response_model=OrderFull,
     status_code=201,
     responses={
         401: {"content": {"application/json": NOT_AUTHENTICATED_RESPONSE_EXAMPLE}},
@@ -53,5 +52,19 @@ def order(order_id: str, user=Depends(manager)):
     },
 )
 def delivered(order_id: str, user=Depends(manager)):
+    """ Set the order's status as delivered """
+    return None
+
+
+@orders_router.post(
+    "/{order_id}/callback",
+    status_code=201,
+    responses={
+        401: {"content": {"application/json": NOT_AUTHENTICATED_RESPONSE_EXAMPLE}},
+        403: {"content": {"application/json": ACCESS_DENIED_RESPONSE_EXAMPLE}},
+        404: {"content": {"application/json": NOT_FOUND_RESPONSE_EXAMPLE}},
+    },
+)
+def callback(order_id: str, user=Depends(manager)):
     """ Set the order's status as delivered """
     return None

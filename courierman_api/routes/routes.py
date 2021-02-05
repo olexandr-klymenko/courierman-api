@@ -44,7 +44,6 @@ def route(route_id: str, user=Depends(manager)):
 
 @routes_router.post(
     "/{route_id}/completed",
-    response_model=RouteFull,
     responses={
         401: {"content": {"application/json": NOT_AUTHENTICATED_RESPONSE_EXAMPLE}},
         403: {"content": {"application/json": ACCESS_DENIED_RESPONSE_EXAMPLE}},
