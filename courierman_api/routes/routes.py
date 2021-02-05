@@ -3,14 +3,13 @@ from typing import List
 from fastapi import APIRouter, Depends
 
 from courierman_api.auth_manager import manager
-from courierman_api.models import (
-    RouteFull, RouteBrief
-)
+from courierman_api.models import RouteFull, RouteBrief
 from courierman_api.response_examples import (
     NOT_FOUND_RESPONSE_EXAMPLE,
     NOT_AUTHENTICATED_RESPONSE_EXAMPLE,
     ACCESS_DENIED_RESPONSE_EXAMPLE,
 )
+from courierman_api.headers import x_version_header
 
 routes_router = APIRouter(prefix="/routes", tags=["Routes"])
 
@@ -23,7 +22,7 @@ routes_router = APIRouter(prefix="/routes", tags=["Routes"])
         403: {"content": {"application/json": ACCESS_DENIED_RESPONSE_EXAMPLE}},
     },
 )
-def routes_list(user=Depends(manager)):
+def routes_list(user=Depends(manager), x_version=x_version_header):
     """ Get routes list """
     return []
 
@@ -37,7 +36,7 @@ def routes_list(user=Depends(manager)):
         404: {"content": {"application/json": NOT_FOUND_RESPONSE_EXAMPLE}},
     },
 )
-def route(route_id: str, user=Depends(manager)):
+def route(route_id: str, user=Depends(manager), x_version=x_version_header):
     """ Get route """
     return None
 
@@ -50,6 +49,6 @@ def route(route_id: str, user=Depends(manager)):
         404: {"content": {"application/json": NOT_FOUND_RESPONSE_EXAMPLE}},
     },
 )
-def completed(route_id: str, user=Depends(manager)):
+def completed(route_id: str, user=Depends(manager), x_version=x_version_header):
     """ Set the route's status as completed """
     return None

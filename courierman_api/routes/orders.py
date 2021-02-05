@@ -3,14 +3,13 @@ from typing import List
 from fastapi import APIRouter, Depends
 
 from courierman_api.auth_manager import manager
-from courierman_api.models import (
-    OrderFull, OrderBrief
-)
+from courierman_api.models import OrderFull, OrderBrief
 from courierman_api.response_examples import (
     NOT_FOUND_RESPONSE_EXAMPLE,
     NOT_AUTHENTICATED_RESPONSE_EXAMPLE,
     ACCESS_DENIED_RESPONSE_EXAMPLE,
 )
+from courierman_api.headers import x_version_header
 
 orders_router = APIRouter(prefix="/orders", tags=["Orders"])
 
@@ -23,7 +22,7 @@ orders_router = APIRouter(prefix="/orders", tags=["Orders"])
         403: {"content": {"application/json": ACCESS_DENIED_RESPONSE_EXAMPLE}},
     },
 )
-def orders_list(route_id: str, user=Depends(manager)):
+def orders_list(route_id: str, user=Depends(manager), x_version=x_version_header):
     """ Get orders list """
     return []
 
@@ -37,7 +36,7 @@ def orders_list(route_id: str, user=Depends(manager)):
         404: {"content": {"application/json": NOT_FOUND_RESPONSE_EXAMPLE}},
     },
 )
-def order(order_id: str, user=Depends(manager)):
+def order(order_id: str, user=Depends(manager), x_version=x_version_header):
     """ Get order """
     return None
 
@@ -51,7 +50,7 @@ def order(order_id: str, user=Depends(manager)):
         404: {"content": {"application/json": NOT_FOUND_RESPONSE_EXAMPLE}},
     },
 )
-def delivered(order_id: str, user=Depends(manager)):
+def delivered(order_id: str, user=Depends(manager), x_version=x_version_header):
     """ Set the order's status as delivered """
     return None
 
@@ -65,6 +64,6 @@ def delivered(order_id: str, user=Depends(manager)):
         404: {"content": {"application/json": NOT_FOUND_RESPONSE_EXAMPLE}},
     },
 )
-def callback(order_id: str, user=Depends(manager)):
-    """ Set the order's status as delivered """
+def callback(order_id: str, user=Depends(manager), x_version=x_version_header):
+    """ Establish call with the customer """
     return None

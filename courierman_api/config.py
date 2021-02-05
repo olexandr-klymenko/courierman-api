@@ -10,7 +10,7 @@ from courierman_api.logging import InterceptHandler
 config = Config(".env")
 
 API_PREFIX = "/api"
-VERSION = "0.1.0"
+VERSION = "1"
 DEBUG: bool = config("DEBUG", cast=bool, default=False)
 MAX_CONNECTIONS_COUNT: int = config("MAX_CONNECTIONS_COUNT", cast=int, default=10)
 MIN_CONNECTIONS_COUNT: int = config("MIN_CONNECTIONS_COUNT", cast=int, default=10)
