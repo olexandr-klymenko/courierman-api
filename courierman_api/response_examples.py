@@ -29,3 +29,15 @@ ACCESS_DENIED_RESPONSE_EXAMPLE = {
         ]
     }
 }
+
+CANT_ESTABLISH_CALL_RESPONSE_EXAMPLE = {
+    "example": {
+        "detail": [
+            {
+                "loc": ["body", "__root__"],
+                "msg": "Can't establish call",
+                "type": "call_failed",
+            }
+        ]
+    },
+}

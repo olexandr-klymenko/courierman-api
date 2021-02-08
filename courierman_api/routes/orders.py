@@ -8,6 +8,7 @@ from courierman_api.response_examples import (
     NOT_FOUND_RESPONSE_EXAMPLE,
     NOT_AUTHENTICATED_RESPONSE_EXAMPLE,
     ACCESS_DENIED_RESPONSE_EXAMPLE,
+    CANT_ESTABLISH_CALL_RESPONSE_EXAMPLE,
 )
 from courierman_api.headers import x_version_header
 
@@ -62,6 +63,10 @@ def delivered(order_id: str, user=Depends(manager), x_version=x_version_header):
         401: {"content": {"application/json": NOT_AUTHENTICATED_RESPONSE_EXAMPLE}},
         403: {"content": {"application/json": ACCESS_DENIED_RESPONSE_EXAMPLE}},
         404: {"content": {"application/json": NOT_FOUND_RESPONSE_EXAMPLE}},
+        4001: {
+            "content": {"application/json": CANT_ESTABLISH_CALL_RESPONSE_EXAMPLE},
+            "description": "Can't establish call",
+        },
     },
 )
 def callback(order_id: str, user=Depends(manager), x_version=x_version_header):
