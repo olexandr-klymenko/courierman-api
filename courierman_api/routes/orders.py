@@ -63,7 +63,7 @@ def delivered(order_id: str, user=Depends(manager), x_version=x_version_header):
         401: {"content": {"application/json": NOT_AUTHENTICATED_RESPONSE_EXAMPLE}},
         403: {"content": {"application/json": ACCESS_DENIED_RESPONSE_EXAMPLE}},
         404: {"content": {"application/json": NOT_FOUND_RESPONSE_EXAMPLE}},
-        4001: {
+        503: {
             "content": {"application/json": CANT_ESTABLISH_CALL_RESPONSE_EXAMPLE},
             "description": "Can't establish call",
         },
