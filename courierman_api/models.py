@@ -1,11 +1,11 @@
 from datetime import time
 from typing import List, Optional
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, HttpUrl
 
 
 class AddressBrief(BaseModel):
-    street: str = Field(default_factory=str, title="Localized street name")
+    street: str = Field(..., title="Localized street name")
     building: str
 
 
@@ -28,14 +28,14 @@ class CustomerInfo(BaseModel):
 
 
 class ProductItem(BaseModel):
-    name: str = Field(default_factory=str, title="Localized product name")
-    price: float = Field(default_factory=float, title="Price per unit")
+    name: str = Field(..., title="Localized product name")
+    price: float = Field(..., title="Price per unit")
     amount: float
-    unit: str = Field(default_factory=str, title="Localized amount unit")
-    bundle: int = Field(default_factory=int, title="Amount in bundle. Unused")
+    unit: str = Field(..., title="Localized amount unit")
+    bundle: int = Field(..., title="Amount in bundle. Unused")
     weight: float
-    total_price: float = Field(default_factory=float, title="Total price")
-    image: str = Field(default_factory=str, title="URL of product image")
+    total_price: float = Field(..., title="Total price")
+    image: HttpUrl
 
 
 class DeliverySlot(BaseModel):
@@ -45,7 +45,7 @@ class DeliverySlot(BaseModel):
 
 class OrderStatus(BaseModel):
     status_enum: str = Field(
-        default_factory=str,
+        ...,
         title="Order status enum",
         description="""
     'delivered': заказ который отмечен курьером как доставлен (кнопка внутри заказа)
@@ -55,31 +55,32 @@ class OrderStatus(BaseModel):
     'canceled': заказ который по тем или иным причинам был отменен
     """,
     )
-    status_name: str = Field(default_factory=str, title="Localized order status")
+    status_name: str = Field(..., title="Localized order status")
 
 
 class PaymentMethod(BaseModel):
     method_enum: str = Field(
-        default_factory=str,
+        ...,
         title="Payment method enum",
-        description="""'cash': Наличные
+        description="""
+    'cash': Наличные
     'on_site': На сайте
     'terminal': Терминал
     'cashless': Б/Н""",
     )
-    method_name: str = Field(default_factory=str, title="Localized payment method")
+    method_name: str = Field(..., title="Localized payment method")
 
 
 class PaymentStatus(BaseModel):
     status_enum: str = Field(
-        default_factory=str,
+        ...,
         title="Payment status enum",
         description="""
     'paid': Заказ оплачн
     'not_paid': Заказ не оплачен
     """,
     )
-    status_name: str = Field(default_factory=str, title="Localized payment status")
+    status_name: str = Field(..., title="Localized payment status")
 
 
 class OrderBrief(BaseModel):
@@ -90,11 +91,11 @@ class OrderBrief(BaseModel):
     boxes: List[str]
     virtual_boxes: List[str]
     weight: float
-    weight_unit: str = Field(default_factory=str, title="Localized weight unit")
+    weight_unit: str = Field(..., title="Localized weight unit")
     payment_method: PaymentMethod
     payment_status: PaymentStatus
     actual_items_price: float
-    currency: str = Field(default_factory=str, title="Localized currency unit")
+    currency: str = Field(..., title="Localized currency unit")
     comment: str
 
 
@@ -104,7 +105,7 @@ class OrderFull(OrderBrief):
 
 
 class StoreInfo(BaseModel):
-    chain_logo: str = Field(default_factory=str, title="URL of chain logo image")
+    chain_logo: HttpUrl
     address: AddressBrief
 
 
