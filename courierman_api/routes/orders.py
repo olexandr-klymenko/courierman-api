@@ -10,7 +10,7 @@ from courierman_api.response_examples import (
     ACCESS_DENIED_RESPONSE_EXAMPLE,
     CANT_ESTABLISH_CALL_RESPONSE_EXAMPLE,
 )
-from courierman_api.headers import x_version_header
+from courierman_api.headers import x_version_header, x_lang_header
 
 orders_router = APIRouter(prefix="/orders", tags=["Orders"])
 
@@ -23,13 +23,13 @@ orders_router = APIRouter(prefix="/orders", tags=["Orders"])
         403: {"content": {"application/json": ACCESS_DENIED_RESPONSE_EXAMPLE}},
     },
 )
-def orders_list(route_id: str, user=Depends(manager), x_version=x_version_header):
+def orders_list(route_id: str, user=Depends(manager), x_version=x_version_header, x_lang=x_lang_header):
     """ Get orders list """
     return []
 
 
 @orders_router.get(
-    "/{order_id}",
+    "/{order_secret}",
     response_model=OrderFull,
     responses={
         401: {"content": {"application/json": NOT_AUTHENTICATED_RESPONSE_EXAMPLE}},
@@ -37,13 +37,13 @@ def orders_list(route_id: str, user=Depends(manager), x_version=x_version_header
         404: {"content": {"application/json": NOT_FOUND_RESPONSE_EXAMPLE}},
     },
 )
-def order(order_id: str, user=Depends(manager), x_version=x_version_header):
+def order(order_id: str, user=Depends(manager), x_version=x_version_header, x_lang=x_lang_header):
     """ Get order """
     return None
 
 
 @orders_router.post(
-    "/{order_id}/delivered",
+    "/{order_secret}/delivered",
     status_code=201,
     responses={
         401: {"content": {"application/json": NOT_AUTHENTICATED_RESPONSE_EXAMPLE}},
@@ -57,7 +57,7 @@ def delivered(order_id: str, user=Depends(manager), x_version=x_version_header):
 
 
 @orders_router.post(
-    "/{order_id}/callback",
+    "/{order_secret}/callback",
     status_code=201,
     responses={
         401: {"content": {"application/json": NOT_AUTHENTICATED_RESPONSE_EXAMPLE}},

@@ -6,7 +6,7 @@ from courierman_api.response_examples import (
     NOT_AUTHENTICATED_RESPONSE_EXAMPLE,
     ACCESS_DENIED_RESPONSE_EXAMPLE,
 )
-from courierman_api.headers import x_version_header
+from courierman_api.headers import x_version_header, x_lang_header
 
 user_router = APIRouter(prefix="/user", tags=["User"])
 
@@ -19,7 +19,7 @@ user_router = APIRouter(prefix="/user", tags=["User"])
     },
     response_model=UserInfo,
 )
-def info(user=Depends(manager), x_version=x_version_header):
+def info(user=Depends(manager), x_version=x_version_header, x_lang=x_lang_header):
     return None
 
 
@@ -32,13 +32,8 @@ def info(user=Depends(manager), x_version=x_version_header):
     },
 )
 def password_change(
-    password_change: PasswordChangeRequest,
+    password: PasswordChangeRequest,
     user=Depends(manager),
     x_version=x_version_header,
 ):
-    return None
-
-
-@user_router.post("/password_recovery", status_code=201)
-def password_recovery(phone_number: str, x_version=x_version_header):
     return None

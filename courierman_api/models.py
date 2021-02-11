@@ -43,15 +43,18 @@ class DeliverySlot(BaseModel):
 
 
 class OrderBrief(BaseModel):
+    order_secret: str
     status: str
     address: AddressBrief
     delivery_slot: DeliverySlot
     boxes: List[str]
     virtual_boxes: List[str]
     weight: float
+    weight_unit: str
     payment_method: str
     payment_status: str
     actual_items_price: float
+    currency: str
     comment: str
 
 
@@ -94,6 +97,7 @@ class LoginResponse(BaseModel):
 
 
 class PasswordChangeRequest(BaseModel):
+    current_password: str
     password: str = Password
 
 

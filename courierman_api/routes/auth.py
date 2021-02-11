@@ -5,7 +5,8 @@ from fastapi.security import OAuth2PasswordRequestForm
 from fastapi_login.exceptions import InvalidCredentialsException
 
 from courierman_api.auth_manager import load_user, manager
-from courierman_api.models import LoginResponse, LoginRequest
+from courierman_api.models import LoginResponse
+from courierman_api.headers import x_version_header
 
 auth_router = APIRouter(prefix="/auth", tags=["Auth"])
 
@@ -29,3 +30,8 @@ def login(data: OAuth2PasswordRequestForm = Depends()):
 
     access_token = manager.create_access_token(data=dict(sub=phone_number))
     return {"access_token": access_token}
+
+
+@auth_router.post("/logout", status_code=201)
+def logout(user=Depends(manager), x_version=x_version_header):
+    return None

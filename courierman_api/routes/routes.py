@@ -9,7 +9,7 @@ from courierman_api.response_examples import (
     NOT_AUTHENTICATED_RESPONSE_EXAMPLE,
     ACCESS_DENIED_RESPONSE_EXAMPLE,
 )
-from courierman_api.headers import x_version_header
+from courierman_api.headers import x_version_header, x_lang_header
 
 routes_router = APIRouter(prefix="/routes", tags=["Routes"])
 
@@ -22,7 +22,7 @@ routes_router = APIRouter(prefix="/routes", tags=["Routes"])
         403: {"content": {"application/json": ACCESS_DENIED_RESPONSE_EXAMPLE}},
     },
 )
-def routes_list(user=Depends(manager), x_version=x_version_header):
+def routes_list(user=Depends(manager), x_version=x_version_header, x_lang=x_lang_header):
     """ Get routes list """
     return []
 
@@ -36,13 +36,14 @@ def routes_list(user=Depends(manager), x_version=x_version_header):
         404: {"content": {"application/json": NOT_FOUND_RESPONSE_EXAMPLE}},
     },
 )
-def route(route_id: str, user=Depends(manager), x_version=x_version_header):
+def route(route_id: str, user=Depends(manager), x_version=x_version_header, x_lang=x_lang_header):
     """ Get route """
     return None
 
 
 @routes_router.post(
     "/{route_id}/completed",
+    status_code=201,
     responses={
         401: {"content": {"application/json": NOT_AUTHENTICATED_RESPONSE_EXAMPLE}},
         403: {"content": {"application/json": ACCESS_DENIED_RESPONSE_EXAMPLE}},
