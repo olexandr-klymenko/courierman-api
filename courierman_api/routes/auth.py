@@ -38,7 +38,6 @@ def login(data: OAuth2PasswordRequestForm = Depends()):
 
 @auth_router.post(
     "/logout",
-    status_code=201,
     responses={
         401: {"content": {"application/json": NOT_AUTHENTICATED_RESPONSE_EXAMPLE}},
         403: {"content": {"application/json": ACCESS_DENIED_RESPONSE_EXAMPLE}},

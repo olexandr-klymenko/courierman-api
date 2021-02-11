@@ -1,0 +1,1856 @@
+{
+  "openapi": "3.0.2",
+  "info": {
+    "title": "courierman_api",
+    "version": "1"
+  },
+  "paths": {
+    "/api/auth/token": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Login",
+        "description": "Get access token.\nusername: phone number",
+        "operationId": "login_api_auth_token_post",
+        "requestBody": {
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_login_api_auth_token_post"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LoginResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/auth/logout": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Logout",
+        "operationId": "logout_api_auth_logout_post",
+        "parameters": [
+          {
+            "required": false,
+            "schema": {
+              "title": "Current API version"
+            },
+            "name": "X-Version",
+            "in": "header"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "example": {
+                  "detail": [
+                    {
+                      "loc": [
+                        "body",
+                        "__root__"
+                      ],
+                      "msg": "Not authenticated",
+                      "type": "not_authenticated"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "example": {
+                  "detail": [
+                    {
+                      "loc": [
+                        "body",
+                        "__root__"
+                      ],
+                      "msg": "Access denied",
+                      "type": "access_denied"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "LoginManager": []
+          }
+        ]
+      }
+    },
+    "/api/user/me": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Info",
+        "operationId": "info_api_user_me_get",
+        "parameters": [
+          {
+            "required": false,
+            "schema": {
+              "title": "Current API version"
+            },
+            "name": "X-Version",
+            "in": "header"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Current localization"
+            },
+            "name": "X-Lang",
+            "in": "header"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserInfo"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "example": {
+                  "detail": [
+                    {
+                      "loc": [
+                        "body",
+                        "__root__"
+                      ],
+                      "msg": "Not authenticated",
+                      "type": "not_authenticated"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "example": {
+                  "detail": [
+                    {
+                      "loc": [
+                        "body",
+                        "__root__"
+                      ],
+                      "msg": "Access denied",
+                      "type": "access_denied"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "LoginManager": []
+          }
+        ]
+      }
+    },
+    "/api/user/password_change": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Password Change",
+        "operationId": "password_change_api_user_password_change_post",
+        "parameters": [
+          {
+            "required": false,
+            "schema": {
+              "title": "Current API version"
+            },
+            "name": "X-Version",
+            "in": "header"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PasswordChangeRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "example": {
+                  "detail": [
+                    {
+                      "loc": [
+                        "body",
+                        "__root__"
+                      ],
+                      "msg": "Not authenticated",
+                      "type": "not_authenticated"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "example": {
+                  "detail": [
+                    {
+                      "loc": [
+                        "body",
+                        "__root__"
+                      ],
+                      "msg": "Access denied",
+                      "type": "access_denied"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "LoginManager": []
+          }
+        ]
+      }
+    },
+    "/api/routes/": {
+      "get": {
+        "tags": [
+          "Routes"
+        ],
+        "summary": "Routes List",
+        "description": "Get routes list ",
+        "operationId": "routes_list_api_routes__get",
+        "parameters": [
+          {
+            "required": false,
+            "schema": {
+              "title": "Current API version"
+            },
+            "name": "X-Version",
+            "in": "header"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Current localization"
+            },
+            "name": "X-Lang",
+            "in": "header"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Response Routes List Api Routes  Get",
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/RouteBrief"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "example": {
+                  "detail": [
+                    {
+                      "loc": [
+                        "body",
+                        "__root__"
+                      ],
+                      "msg": "Not authenticated",
+                      "type": "not_authenticated"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "example": {
+                  "detail": [
+                    {
+                      "loc": [
+                        "body",
+                        "__root__"
+                      ],
+                      "msg": "Access denied",
+                      "type": "access_denied"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "LoginManager": []
+          }
+        ]
+      }
+    },
+    "/api/routes/{route_id}": {
+      "get": {
+        "tags": [
+          "Routes"
+        ],
+        "summary": "Route",
+        "description": "Get route ",
+        "operationId": "route_api_routes__route_id__get",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Route Id",
+              "type": "string"
+            },
+            "name": "route_id",
+            "in": "path"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Current API version"
+            },
+            "name": "X-Version",
+            "in": "header"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Current localization"
+            },
+            "name": "X-Lang",
+            "in": "header"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RouteFull"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "example": {
+                  "detail": [
+                    {
+                      "loc": [
+                        "body",
+                        "__root__"
+                      ],
+                      "msg": "Not authenticated",
+                      "type": "not_authenticated"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "example": {
+                  "detail": [
+                    {
+                      "loc": [
+                        "body",
+                        "__root__"
+                      ],
+                      "msg": "Access denied",
+                      "type": "access_denied"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "example": {
+                  "detail": [
+                    {
+                      "loc": [
+                        "body",
+                        "__root__"
+                      ],
+                      "msg": "Not found",
+                      "type": "not_found"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "LoginManager": []
+          }
+        ]
+      }
+    },
+    "/api/routes/{route_id}/loaded": {
+      "post": {
+        "tags": [
+          "Routes"
+        ],
+        "summary": "Loaded",
+        "description": "Set the route\u0027s status as loaded ",
+        "operationId": "loaded_api_routes__route_id__loaded_post",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Route Id",
+              "type": "string"
+            },
+            "name": "route_id",
+            "in": "path"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Current API version"
+            },
+            "name": "X-Version",
+            "in": "header"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "example": {
+                  "detail": [
+                    {
+                      "loc": [
+                        "body",
+                        "__root__"
+                      ],
+                      "msg": "Not authenticated",
+                      "type": "not_authenticated"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "example": {
+                  "detail": [
+                    {
+                      "loc": [
+                        "body",
+                        "__root__"
+                      ],
+                      "msg": "Access denied",
+                      "type": "access_denied"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "example": {
+                  "detail": [
+                    {
+                      "loc": [
+                        "body",
+                        "__root__"
+                      ],
+                      "msg": "Not found",
+                      "type": "not_found"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "LoginManager": []
+          }
+        ]
+      }
+    },
+    "/api/routes/{route_id}/completed": {
+      "post": {
+        "tags": [
+          "Routes"
+        ],
+        "summary": "Completed",
+        "description": "Set the route\u0027s status as completed ",
+        "operationId": "completed_api_routes__route_id__completed_post",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Route Id",
+              "type": "string"
+            },
+            "name": "route_id",
+            "in": "path"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Current API version"
+            },
+            "name": "X-Version",
+            "in": "header"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "example": {
+                  "detail": [
+                    {
+                      "loc": [
+                        "body",
+                        "__root__"
+                      ],
+                      "msg": "Not authenticated",
+                      "type": "not_authenticated"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "example": {
+                  "detail": [
+                    {
+                      "loc": [
+                        "body",
+                        "__root__"
+                      ],
+                      "msg": "Access denied",
+                      "type": "access_denied"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "example": {
+                  "detail": [
+                    {
+                      "loc": [
+                        "body",
+                        "__root__"
+                      ],
+                      "msg": "Not found",
+                      "type": "not_found"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "LoginManager": []
+          }
+        ]
+      }
+    },
+    "/api/orders/": {
+      "get": {
+        "tags": [
+          "Orders"
+        ],
+        "summary": "Orders List",
+        "description": "Get orders list ",
+        "operationId": "orders_list_api_orders__get",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Route Id",
+              "type": "string"
+            },
+            "name": "route_id",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Current API version"
+            },
+            "name": "X-Version",
+            "in": "header"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Current localization"
+            },
+            "name": "X-Lang",
+            "in": "header"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Response Orders List Api Orders  Get",
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/OrderBrief"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "example": {
+                  "detail": [
+                    {
+                      "loc": [
+                        "body",
+                        "__root__"
+                      ],
+                      "msg": "Not authenticated",
+                      "type": "not_authenticated"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "example": {
+                  "detail": [
+                    {
+                      "loc": [
+                        "body",
+                        "__root__"
+                      ],
+                      "msg": "Access denied",
+                      "type": "access_denied"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "LoginManager": []
+          }
+        ]
+      }
+    },
+    "/api/orders/{order_secret}": {
+      "get": {
+        "tags": [
+          "Orders"
+        ],
+        "summary": "Order",
+        "description": "Get order ",
+        "operationId": "order_api_orders__order_secret__get",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Order Secret",
+              "type": "string"
+            },
+            "name": "order_secret",
+            "in": "path"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Current API version"
+            },
+            "name": "X-Version",
+            "in": "header"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Current localization"
+            },
+            "name": "X-Lang",
+            "in": "header"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrderFull"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "example": {
+                  "detail": [
+                    {
+                      "loc": [
+                        "body",
+                        "__root__"
+                      ],
+                      "msg": "Not authenticated",
+                      "type": "not_authenticated"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "example": {
+                  "detail": [
+                    {
+                      "loc": [
+                        "body",
+                        "__root__"
+                      ],
+                      "msg": "Access denied",
+                      "type": "access_denied"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "example": {
+                  "detail": [
+                    {
+                      "loc": [
+                        "body",
+                        "__root__"
+                      ],
+                      "msg": "Not found",
+                      "type": "not_found"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "LoginManager": []
+          }
+        ]
+      }
+    },
+    "/api/orders/{order_secret}/delivered": {
+      "post": {
+        "tags": [
+          "Orders"
+        ],
+        "summary": "Delivered",
+        "description": "Set the order\u0027s status as delivered ",
+        "operationId": "delivered_api_orders__order_secret__delivered_post",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Order Secret",
+              "type": "string"
+            },
+            "name": "order_secret",
+            "in": "path"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Current API version"
+            },
+            "name": "X-Version",
+            "in": "header"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "example": {
+                  "detail": [
+                    {
+                      "loc": [
+                        "body",
+                        "__root__"
+                      ],
+                      "msg": "Not authenticated",
+                      "type": "not_authenticated"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "example": {
+                  "detail": [
+                    {
+                      "loc": [
+                        "body",
+                        "__root__"
+                      ],
+                      "msg": "Access denied",
+                      "type": "access_denied"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "example": {
+                  "detail": [
+                    {
+                      "loc": [
+                        "body",
+                        "__root__"
+                      ],
+                      "msg": "Not found",
+                      "type": "not_found"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "LoginManager": []
+          }
+        ]
+      }
+    },
+    "/api/orders/{order_secret}/callback": {
+      "post": {
+        "tags": [
+          "Orders"
+        ],
+        "summary": "Callback",
+        "description": "Establish call with the customer ",
+        "operationId": "callback_api_orders__order_secret__callback_post",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Order Secret",
+              "type": "string"
+            },
+            "name": "order_secret",
+            "in": "path"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Current API version"
+            },
+            "name": "X-Version",
+            "in": "header"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "example": {
+                  "detail": [
+                    {
+                      "loc": [
+                        "body",
+                        "__root__"
+                      ],
+                      "msg": "Not authenticated",
+                      "type": "not_authenticated"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "example": {
+                  "detail": [
+                    {
+                      "loc": [
+                        "body",
+                        "__root__"
+                      ],
+                      "msg": "Access denied",
+                      "type": "access_denied"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "example": {
+                  "detail": [
+                    {
+                      "loc": [
+                        "body",
+                        "__root__"
+                      ],
+                      "msg": "Not found",
+                      "type": "not_found"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Can\u0027t establish call",
+            "content": {
+              "application/json": {
+                "example": {
+                  "detail": [
+                    {
+                      "loc": [
+                        "body",
+                        "__root__"
+                      ],
+                      "msg": "Can\u0027t establish call",
+                      "type": "call_failed"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "LoginManager": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AddressBrief": {
+        "title": "AddressBrief",
+        "required": [
+          "building"
+        ],
+        "type": "object",
+        "properties": {
+          "street": {
+            "title": "Localized street name",
+            "type": "string"
+          },
+          "building": {
+            "title": "Building",
+            "type": "string"
+          }
+        }
+      },
+      "AddressFull": {
+        "title": "AddressFull",
+        "required": [
+          "building",
+          "city"
+        ],
+        "type": "object",
+        "properties": {
+          "street": {
+            "title": "Localized street name",
+            "type": "string"
+          },
+          "building": {
+            "title": "Building",
+            "type": "string"
+          },
+          "city": {
+            "title": "City",
+            "type": "string"
+          },
+          "block": {
+            "title": "Block",
+            "type": "integer"
+          },
+          "entrance": {
+            "title": "Entrance",
+            "type": "integer"
+          },
+          "entrance_code": {
+            "title": "Entrance Code",
+            "type": "string"
+          },
+          "floor": {
+            "title": "Floor",
+            "type": "integer"
+          },
+          "flat": {
+            "title": "Flat",
+            "type": "string"
+          },
+          "office": {
+            "title": "Office",
+            "type": "string"
+          },
+          "company": {
+            "title": "Company",
+            "type": "string"
+          },
+          "is_elevator": {
+            "title": "Is Elevator",
+            "type": "boolean"
+          }
+        }
+      },
+      "Body_login_api_auth_token_post": {
+        "title": "Body_login_api_auth_token_post",
+        "required": [
+          "username",
+          "password"
+        ],
+        "type": "object",
+        "properties": {
+          "grant_type": {
+            "title": "Grant Type",
+            "pattern": "password",
+            "type": "string"
+          },
+          "username": {
+            "title": "Username",
+            "type": "string"
+          },
+          "password": {
+            "title": "Password",
+            "type": "string"
+          },
+          "scope": {
+            "title": "Scope",
+            "type": "string",
+            "default": ""
+          },
+          "client_id": {
+            "title": "Client Id",
+            "type": "string"
+          },
+          "client_secret": {
+            "title": "Client Secret",
+            "type": "string"
+          }
+        }
+      },
+      "CustomerInfo": {
+        "title": "CustomerInfo",
+        "required": [
+          "address",
+          "name",
+          "customer_type"
+        ],
+        "type": "object",
+        "properties": {
+          "address": {
+            "$ref": "#/components/schemas/AddressFull"
+          },
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "customer_type": {
+            "title": "Customer Type",
+            "type": "string"
+          }
+        }
+      },
+      "DeliverySlot": {
+        "title": "DeliverySlot",
+        "required": [
+          "start_time",
+          "finish_time"
+        ],
+        "type": "object",
+        "properties": {
+          "start_time": {
+            "title": "Start Time",
+            "type": "string",
+            "format": "time"
+          },
+          "finish_time": {
+            "title": "Finish Time",
+            "type": "string",
+            "format": "time"
+          }
+        }
+      },
+      "HTTPValidationError": {
+        "title": "HTTPValidationError",
+        "type": "object",
+        "properties": {
+          "detail": {
+            "title": "Detail",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            }
+          }
+        }
+      },
+      "LoginResponse": {
+        "title": "LoginResponse",
+        "required": [
+          "access_token"
+        ],
+        "type": "object",
+        "properties": {
+          "access_token": {
+            "title": "Access Token",
+            "type": "string"
+          },
+          "token_type": {
+            "title": "Token Type",
+            "type": "string",
+            "default": "bearer"
+          }
+        }
+      },
+      "OrderBrief": {
+        "title": "OrderBrief",
+        "required": [
+          "order_secret",
+          "status",
+          "address",
+          "delivery_slot",
+          "boxes",
+          "virtual_boxes",
+          "weight",
+          "payment_method",
+          "payment_status",
+          "actual_items_price",
+          "comment"
+        ],
+        "type": "object",
+        "properties": {
+          "order_secret": {
+            "title": "Order Secret",
+            "type": "string"
+          },
+          "status": {
+            "$ref": "#/components/schemas/OrderStatus"
+          },
+          "address": {
+            "$ref": "#/components/schemas/AddressBrief"
+          },
+          "delivery_slot": {
+            "$ref": "#/components/schemas/DeliverySlot"
+          },
+          "boxes": {
+            "title": "Boxes",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "virtual_boxes": {
+            "title": "Virtual Boxes",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "weight": {
+            "title": "Weight",
+            "type": "number"
+          },
+          "weight_unit": {
+            "title": "Localized weight unit",
+            "type": "string"
+          },
+          "payment_method": {
+            "$ref": "#/components/schemas/PaymentMethod"
+          },
+          "payment_status": {
+            "$ref": "#/components/schemas/PaymentStatus"
+          },
+          "actual_items_price": {
+            "title": "Actual Items Price",
+            "type": "number"
+          },
+          "currency": {
+            "title": "Localized currency unit",
+            "type": "string"
+          },
+          "comment": {
+            "title": "Comment",
+            "type": "string"
+          }
+        }
+      },
+      "OrderFull": {
+        "title": "OrderFull",
+        "required": [
+          "order_secret",
+          "status",
+          "address",
+          "delivery_slot",
+          "boxes",
+          "virtual_boxes",
+          "weight",
+          "payment_method",
+          "payment_status",
+          "actual_items_price",
+          "comment",
+          "customer_info",
+          "items"
+        ],
+        "type": "object",
+        "properties": {
+          "order_secret": {
+            "title": "Order Secret",
+            "type": "string"
+          },
+          "status": {
+            "$ref": "#/components/schemas/OrderStatus"
+          },
+          "address": {
+            "$ref": "#/components/schemas/AddressBrief"
+          },
+          "delivery_slot": {
+            "$ref": "#/components/schemas/DeliverySlot"
+          },
+          "boxes": {
+            "title": "Boxes",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "virtual_boxes": {
+            "title": "Virtual Boxes",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "weight": {
+            "title": "Weight",
+            "type": "number"
+          },
+          "weight_unit": {
+            "title": "Localized weight unit",
+            "type": "string"
+          },
+          "payment_method": {
+            "$ref": "#/components/schemas/PaymentMethod"
+          },
+          "payment_status": {
+            "$ref": "#/components/schemas/PaymentStatus"
+          },
+          "actual_items_price": {
+            "title": "Actual Items Price",
+            "type": "number"
+          },
+          "currency": {
+            "title": "Localized currency unit",
+            "type": "string"
+          },
+          "comment": {
+            "title": "Comment",
+            "type": "string"
+          },
+          "customer_info": {
+            "$ref": "#/components/schemas/CustomerInfo"
+          },
+          "items": {
+            "title": "Items",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProductItem"
+            }
+          }
+        }
+      },
+      "OrderStatus": {
+        "title": "OrderStatus",
+        "required": [
+          "status"
+        ],
+        "type": "object",
+        "properties": {
+          "status": {
+            "$ref": "#/components/schemas/OrderStatusEnum"
+          },
+          "status_name": {
+            "title": "Localized order status",
+            "type": "string"
+          }
+        }
+      },
+      "OrderStatusEnum": {
+        "title": "OrderStatusEnum",
+        "enum": [
+          "delivered",
+          "delivering",
+          "assembled",
+          "assembling",
+          "canceled"
+        ],
+        "description": "\u0027delivered\u0027: заказ который отмечен курьером как доставлен (кнопка внутри заказа)\u003cbr\u003e\n\u0027delivering\u0027: заказ который у курьера на борту\u003cbr\u003e\n\u0027assembled\u0027: заказ который еще у кладовщика и ожидает отгрузки курьеру\u003cbr\u003e\n\u0027assembling\u0027: заказ который еще собирается сборщиком\u003cbr\u003e\n\u0027canceled\u0027: заказ который по тем или иным причинам был отменен"
+      },
+      "PasswordChangeRequest": {
+        "title": "PasswordChangeRequest",
+        "required": [
+          "current_password",
+          "new_password"
+        ],
+        "type": "object",
+        "properties": {
+          "current_password": {
+            "title": "Current Password",
+            "type": "string"
+          },
+          "new_password": {
+            "title": "New Password",
+            "maxLength": 14,
+            "minLength": 6,
+            "pattern": "[a-zA-Z0-9,.;:\\+\\-_\u0027]",
+            "type": "string"
+          }
+        }
+      },
+      "PaymentMethod": {
+        "title": "PaymentMethod",
+        "required": [
+          "method"
+        ],
+        "type": "object",
+        "properties": {
+          "method": {
+            "$ref": "#/components/schemas/PaymentMethodEnum"
+          },
+          "method_name": {
+            "title": "Localized payment method",
+            "type": "string"
+          }
+        }
+      },
+      "PaymentMethodEnum": {
+        "title": "PaymentMethodEnum",
+        "enum": [
+          "cash",
+          "on_site",
+          "terminal",
+          "cashless"
+        ],
+        "description": "\u0027cash\u0027: Наличные\u003cbr\u003e\n\u0027on_site\u0027: На сайте\u003cbr\u003e\n\u0027terminal\u0027: Терминал\u003cbr\u003e\n\u0027cashless\u0027: Б/Н"
+      },
+      "PaymentStatus": {
+        "title": "PaymentStatus",
+        "required": [
+          "status"
+        ],
+        "type": "object",
+        "properties": {
+          "status": {
+            "$ref": "#/components/schemas/PaymentStatusEnum"
+          },
+          "status_name": {
+            "title": "Localized payment status",
+            "type": "string"
+          }
+        }
+      },
+      "PaymentStatusEnum": {
+        "title": "PaymentStatusEnum",
+        "enum": [
+          "paid",
+          "not_paid"
+        ],
+        "description": "\u0027paid\u0027: Заказ оплачн\u003cbr\u003e\n\u0027not_paid\u0027: Заказ не оплачен"
+      },
+      "ProductItem": {
+        "title": "ProductItem",
+        "required": [
+          "amount",
+          "weight"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "title": "Localized product name",
+            "type": "string"
+          },
+          "price": {
+            "title": "Price per unit",
+            "type": "number"
+          },
+          "amount": {
+            "title": "Amount",
+            "type": "number"
+          },
+          "unit": {
+            "title": "Localized amount unit",
+            "type": "string"
+          },
+          "bundle": {
+            "title": "Amount in bundle. Unused",
+            "type": "integer"
+          },
+          "weight": {
+            "title": "Weight",
+            "type": "number"
+          },
+          "total_price": {
+            "title": "Total price",
+            "type": "number"
+          },
+          "image": {
+            "title": "URL of product image",
+            "type": "string"
+          }
+        }
+      },
+      "RouteBrief": {
+        "title": "RouteBrief",
+        "required": [
+          "route_id",
+          "start_point",
+          "delivery_slot",
+          "is_loaded",
+          "is_completed",
+          "number_of_orders"
+        ],
+        "type": "object",
+        "properties": {
+          "route_id": {
+            "title": "Route Id",
+            "type": "string"
+          },
+          "start_point": {
+            "$ref": "#/components/schemas/StoreInfo"
+          },
+          "delivery_slot": {
+            "$ref": "#/components/schemas/DeliverySlot"
+          },
+          "is_loaded": {
+            "title": "Is Loaded",
+            "type": "boolean"
+          },
+          "is_completed": {
+            "title": "Is Completed",
+            "type": "boolean"
+          },
+          "number_of_orders": {
+            "title": "Number Of Orders",
+            "type": "integer"
+          }
+        }
+      },
+      "RouteFull": {
+        "title": "RouteFull",
+        "required": [
+          "route_id",
+          "start_point",
+          "delivery_slot",
+          "is_loaded",
+          "is_completed",
+          "number_of_orders",
+          "orders"
+        ],
+        "type": "object",
+        "properties": {
+          "route_id": {
+            "title": "Route Id",
+            "type": "string"
+          },
+          "start_point": {
+            "$ref": "#/components/schemas/StoreInfo"
+          },
+          "delivery_slot": {
+            "$ref": "#/components/schemas/DeliverySlot"
+          },
+          "is_loaded": {
+            "title": "Is Loaded",
+            "type": "boolean"
+          },
+          "is_completed": {
+            "title": "Is Completed",
+            "type": "boolean"
+          },
+          "number_of_orders": {
+            "title": "Number Of Orders",
+            "type": "integer"
+          },
+          "orders": {
+            "title": "Orders",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OrderBrief"
+            }
+          }
+        }
+      },
+      "StoreInfo": {
+        "title": "StoreInfo",
+        "required": [
+          "address"
+        ],
+        "type": "object",
+        "properties": {
+          "chain_logo": {
+            "title": "URL of chain logo image",
+            "type": "string"
+          },
+          "address": {
+            "$ref": "#/components/schemas/AddressBrief"
+          }
+        }
+      },
+      "UserInfo": {
+        "title": "UserInfo",
+        "required": [
+          "full_name",
+          "phone_number"
+        ],
+        "type": "object",
+        "properties": {
+          "full_name": {
+            "title": "Full Name",
+            "type": "string"
+          },
+          "phone_number": {
+            "title": "Phone Number",
+            "type": "string"
+          }
+        }
+      },
+      "ValidationError": {
+        "title": "ValidationError",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "type": "object",
+        "properties": {
+          "loc": {
+            "title": "Location",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "msg": {
+            "title": "Message",
+            "type": "string"
+          },
+          "type": {
+            "title": "Error Type",
+            "type": "string"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "LoginManager": {
+        "type": "oauth2",
+        "flows": {
+          "password": {
+            "scopes": {},
+            "tokenUrl": "/api/auth/token"
+          }
+        }
+      }
+    }
+  }
+}

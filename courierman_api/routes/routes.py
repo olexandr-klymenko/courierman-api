@@ -49,8 +49,20 @@ def route(
 
 
 @routes_router.post(
+    "/{route_id}/loaded",
+    responses={
+        401: {"content": {"application/json": NOT_AUTHENTICATED_RESPONSE_EXAMPLE}},
+        403: {"content": {"application/json": ACCESS_DENIED_RESPONSE_EXAMPLE}},
+        404: {"content": {"application/json": NOT_FOUND_RESPONSE_EXAMPLE}},
+    },
+)
+def loaded(route_id: str, user=Depends(manager), x_version=x_version_header):
+    """ Set the route's status as loaded """
+    return None
+
+
+@routes_router.post(
     "/{route_id}/completed",
-    status_code=201,
     responses={
         401: {"content": {"application/json": NOT_AUTHENTICATED_RESPONSE_EXAMPLE}},
         403: {"content": {"application/json": ACCESS_DENIED_RESPONSE_EXAMPLE}},

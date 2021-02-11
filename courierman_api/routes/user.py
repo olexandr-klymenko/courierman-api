@@ -25,7 +25,6 @@ def info(user=Depends(manager), x_version=x_version_header, x_lang=x_lang_header
 
 @user_router.post(
     "/password_change",
-    status_code=201,
     responses={
         401: {"content": {"application/json": NOT_AUTHENTICATED_RESPONSE_EXAMPLE}},
         403: {"content": {"application/json": ACCESS_DENIED_RESPONSE_EXAMPLE}},

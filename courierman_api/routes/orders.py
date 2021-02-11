@@ -54,7 +54,6 @@ def order(
 
 @orders_router.post(
     "/{order_secret}/delivered",
-    status_code=201,
     responses={
         401: {"content": {"application/json": NOT_AUTHENTICATED_RESPONSE_EXAMPLE}},
         403: {"content": {"application/json": ACCESS_DENIED_RESPONSE_EXAMPLE}},
@@ -68,7 +67,6 @@ def delivered(order_secret: str, user=Depends(manager), x_version=x_version_head
 
 @orders_router.post(
     "/{order_secret}/callback",
-    status_code=201,
     responses={
         401: {"content": {"application/json": NOT_AUTHENTICATED_RESPONSE_EXAMPLE}},
         403: {"content": {"application/json": ACCESS_DENIED_RESPONSE_EXAMPLE}},
