@@ -43,7 +43,7 @@ def orders_list(
     },
 )
 def order(
-    order_id: str,
+    order_secret: str,
     user=Depends(manager),
     x_version=x_version_header,
     x_lang=x_lang_header,
@@ -61,7 +61,7 @@ def order(
         404: {"content": {"application/json": NOT_FOUND_RESPONSE_EXAMPLE}},
     },
 )
-def delivered(order_id: str, user=Depends(manager), x_version=x_version_header):
+def delivered(order_secret: str, user=Depends(manager), x_version=x_version_header):
     """ Set the order's status as delivered """
     return None
 
@@ -79,6 +79,6 @@ def delivered(order_id: str, user=Depends(manager), x_version=x_version_header):
         },
     },
 )
-def callback(order_id: str, user=Depends(manager), x_version=x_version_header):
+def callback(order_secret: str, user=Depends(manager), x_version=x_version_header):
     """ Establish call with the customer """
     return None
