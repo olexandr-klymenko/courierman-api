@@ -22,7 +22,9 @@ routes_router = APIRouter(prefix="/routes", tags=["Routes"])
         403: {"content": {"application/json": ACCESS_DENIED_RESPONSE_EXAMPLE}},
     },
 )
-def routes_list(user=Depends(manager), x_version=x_version_header, x_lang=x_lang_header):
+def routes_list(
+    user=Depends(manager), x_version=x_version_header, x_lang=x_lang_header
+):
     """ Get routes list """
     return []
 
@@ -36,7 +38,12 @@ def routes_list(user=Depends(manager), x_version=x_version_header, x_lang=x_lang
         404: {"content": {"application/json": NOT_FOUND_RESPONSE_EXAMPLE}},
     },
 )
-def route(route_id: str, user=Depends(manager), x_version=x_version_header, x_lang=x_lang_header):
+def route(
+    route_id: str,
+    user=Depends(manager),
+    x_version=x_version_header,
+    x_lang=x_lang_header,
+):
     """ Get route """
     return None
 

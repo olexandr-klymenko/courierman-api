@@ -23,7 +23,12 @@ orders_router = APIRouter(prefix="/orders", tags=["Orders"])
         403: {"content": {"application/json": ACCESS_DENIED_RESPONSE_EXAMPLE}},
     },
 )
-def orders_list(route_id: str, user=Depends(manager), x_version=x_version_header, x_lang=x_lang_header):
+def orders_list(
+    route_id: str,
+    user=Depends(manager),
+    x_version=x_version_header,
+    x_lang=x_lang_header,
+):
     """ Get orders list """
     return []
 
@@ -37,7 +42,12 @@ def orders_list(route_id: str, user=Depends(manager), x_version=x_version_header
         404: {"content": {"application/json": NOT_FOUND_RESPONSE_EXAMPLE}},
     },
 )
-def order(order_id: str, user=Depends(manager), x_version=x_version_header, x_lang=x_lang_header):
+def order(
+    order_id: str,
+    user=Depends(manager),
+    x_version=x_version_header,
+    x_lang=x_lang_header,
+):
     """ Get order """
     return None
 
