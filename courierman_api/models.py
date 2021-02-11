@@ -1,5 +1,4 @@
 from datetime import time
-from enum import Enum
 from typing import List, Optional
 
 from pydantic import BaseModel, Field
@@ -44,58 +43,42 @@ class DeliverySlot(BaseModel):
     finish_time: time
 
 
-class OrderStatusEnum(Enum):
-    """
-    'delivered': заказ который отмечен курьером как доставлен (кнопка внутри заказа)<br>
-    'delivering': заказ который у курьера на борту<br>
-    'assembled': заказ который еще у кладовщика и ожидает отгрузки курьеру<br>
-    'assembling': заказ который еще собирается сборщиком<br>
-    'canceled': заказ который по тем или иным причинам был отменен
-    """
-
-    delivered = "delivered"
-    delivering = "delivering"
-    assembled = "assembled"
-    assembling = "assembling"
-    canceled = "canceled"
-
-
 class OrderStatus(BaseModel):
-    status: OrderStatusEnum
+    status_enum: str = Field(
+        default_factory=str,
+        title="Order status enum",
+        description="""
+    'delivered': заказ который отмечен курьером как доставлен (кнопка внутри заказа)
+    'delivering': заказ который у курьера на борту
+    'assembled': заказ который еще у кладовщика и ожидает отгрузки курьеру
+    'assembling': заказ который еще собирается сборщиком
+    'canceled': заказ который по тем или иным причинам был отменен
+    """,
+    )
     status_name: str = Field(default_factory=str, title="Localized order status")
 
 
-class PaymentMethodEnum(Enum):
-    """
-    'cash': Наличные<br>
-    'on_site': На сайте<br>
-    'terminal': Терминал<br>
-    'cashless': Б/Н
-    """
-
-    cash = "cash"
-    on_site = "on_site"
-    terminal = "terminal"
-    cashless = "cashless"
-
-
 class PaymentMethod(BaseModel):
-    method: PaymentMethodEnum
+    method_enum: str = Field(
+        default_factory=str,
+        title="Payment method enum",
+        description="""'cash': Наличные
+    'on_site': На сайте
+    'terminal': Терминал
+    'cashless': Б/Н""",
+    )
     method_name: str = Field(default_factory=str, title="Localized payment method")
 
 
-class PaymentStatusEnum(Enum):
-    """
-    'paid': Заказ оплачн<br>
-    'not_paid': Заказ не оплачен
-    """
-
-    paid = "paid"
-    not_paid = "not_paid"
-
-
 class PaymentStatus(BaseModel):
-    status: PaymentStatusEnum
+    status_enum: str = Field(
+        default_factory=str,
+        title="Payment status enum",
+        description="""
+    'paid': Заказ оплачн
+    'not_paid': Заказ не оплачен
+    """,
+    )
     status_name: str = Field(default_factory=str, title="Localized payment status")
 
 

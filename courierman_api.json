@@ -1562,30 +1562,18 @@
       },
       "OrderStatus": {
         "title": "OrderStatus",
-        "required": [
-          "status"
-        ],
         "type": "object",
         "properties": {
-          "status": {
-            "$ref": "#/components/schemas/OrderStatusEnum"
+          "status_enum": {
+            "title": "Order status enum",
+            "type": "string",
+            "description": "\n    \u0027delivered\u0027: заказ который отмечен курьером как доставлен (кнопка внутри заказа)\n    \u0027delivering\u0027: заказ который у курьера на борту\n    \u0027assembled\u0027: заказ который еще у кладовщика и ожидает отгрузки курьеру\n    \u0027assembling\u0027: заказ который еще собирается сборщиком\n    \u0027canceled\u0027: заказ который по тем или иным причинам был отменен\n    "
           },
           "status_name": {
             "title": "Localized order status",
             "type": "string"
           }
         }
-      },
-      "OrderStatusEnum": {
-        "title": "OrderStatusEnum",
-        "enum": [
-          "delivered",
-          "delivering",
-          "assembled",
-          "assembling",
-          "canceled"
-        ],
-        "description": "\u0027delivered\u0027: заказ который отмечен курьером как доставлен (кнопка внутри заказа)\u003cbr\u003e\n\u0027delivering\u0027: заказ который у курьера на борту\u003cbr\u003e\n\u0027assembled\u0027: заказ который еще у кладовщика и ожидает отгрузки курьеру\u003cbr\u003e\n\u0027assembling\u0027: заказ который еще собирается сборщиком\u003cbr\u003e\n\u0027canceled\u0027: заказ который по тем или иным причинам был отменен"
       },
       "PasswordChangeRequest": {
         "title": "PasswordChangeRequest",
@@ -1610,13 +1598,12 @@
       },
       "PaymentMethod": {
         "title": "PaymentMethod",
-        "required": [
-          "method"
-        ],
         "type": "object",
         "properties": {
-          "method": {
-            "$ref": "#/components/schemas/PaymentMethodEnum"
+          "method_enum": {
+            "title": "Payment method enum",
+            "type": "string",
+            "description": "\u0027cash\u0027: Наличные\n    \u0027on_site\u0027: На сайте\n    \u0027terminal\u0027: Терминал\n    \u0027cashless\u0027: Б/Н"
           },
           "method_name": {
             "title": "Localized payment method",
@@ -1624,39 +1611,20 @@
           }
         }
       },
-      "PaymentMethodEnum": {
-        "title": "PaymentMethodEnum",
-        "enum": [
-          "cash",
-          "on_site",
-          "terminal",
-          "cashless"
-        ],
-        "description": "\u0027cash\u0027: Наличные\u003cbr\u003e\n\u0027on_site\u0027: На сайте\u003cbr\u003e\n\u0027terminal\u0027: Терминал\u003cbr\u003e\n\u0027cashless\u0027: Б/Н"
-      },
       "PaymentStatus": {
         "title": "PaymentStatus",
-        "required": [
-          "status"
-        ],
         "type": "object",
         "properties": {
-          "status": {
-            "$ref": "#/components/schemas/PaymentStatusEnum"
+          "status_enum": {
+            "title": "Payment status enum",
+            "type": "string",
+            "description": "\n    \u0027paid\u0027: Заказ оплачн\n    \u0027not_paid\u0027: Заказ не оплачен\n    "
           },
           "status_name": {
             "title": "Localized payment status",
             "type": "string"
           }
         }
-      },
-      "PaymentStatusEnum": {
-        "title": "PaymentStatusEnum",
-        "enum": [
-          "paid",
-          "not_paid"
-        ],
-        "description": "\u0027paid\u0027: Заказ оплачн\u003cbr\u003e\n\u0027not_paid\u0027: Заказ не оплачен"
       },
       "ProductItem": {
         "title": "ProductItem",
